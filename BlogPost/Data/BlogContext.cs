@@ -38,5 +38,22 @@ namespace BlogPost.Data
                 .HasMaxLength(60)
                 .IsRequired();
         }
+
+        void ConfigureModelBuilderForArticle(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Article>().ToTable("Article");
+            modelBuilder.Entity<Article>()
+                .Property(s => s.Title)
+                .HasMaxLength(60);
+
+            modelBuilder.Entity<Article>()
+                .Property(s => s.OwnerId)
+                .IsRequired();
+
+            modelBuilder.Entity<Article>()
+                .HasOne(s => s.Owner)
+                .WithMany(u => u.Articles)
+                .HasForeignKey(s => s.OwnerId);
+        }
     }
 }
