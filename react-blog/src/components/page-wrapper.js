@@ -25,11 +25,11 @@ class PageWrapper extends React.Component {
       handlers,
       stateReceived,
       page,
-      documentTitle = 'Simple Blog',
+      documentTitle = 'Programeezy\'s Blog',
       style
     } = this.props
     this.page = page
-    return stateReceived || process.env.REACT_APP_MOCK ? (
+    return stateReceived ? (
       <DocumentTitle title={documentTitle}>
         {_.isEmpty(keyMap) ? (
           <div style={style}>
@@ -54,11 +54,11 @@ class PageWrapper extends React.Component {
   }
 
   componentDidMount() {
-    if (!process.env.REACT_APP_MOCK) this.props.enterPage()
+    this.props.enterPage()
   }
 
   componentWillUnmount() {
-    if (!process.env.REACT_APP_MOCK) this.props.exitPage(this.page)
+    this.props.exitPage(this.page)
   }
 }
 

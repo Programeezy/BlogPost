@@ -1,6 +1,7 @@
 ﻿using BlogPost.Models.Abstract;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,8 @@ namespace BlogPost.Models
         public string Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public List<string> Tags { get; set; } = new List<string>();
+        [NotMapped]
+        public List<String> Tags { get; set; } = new List<String>();
         public long CreationTime { get; set; }
         public long LastEditTime { get; set; }
         public long PublishTime { get; set; }

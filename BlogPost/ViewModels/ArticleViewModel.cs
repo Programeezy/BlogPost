@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BlogPost.ViewModels
 {
@@ -7,7 +8,7 @@ namespace BlogPost.ViewModels
         public string Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public List<string> Tags { get; set; } = new List<string>();
+        public List<String> Tags { get; set; } = new List<String>();
         public long PublishTime { get; set; }
     }
 }
