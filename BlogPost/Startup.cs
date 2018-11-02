@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -36,12 +36,12 @@ namespace BlogPost
         {
             services.AddCors();
 
-            string connection = Configuration.GetConnectionString("DefaultConnection");
+            string connection = Configuration.GetConnectionString("BlogContext");
 
             services
-               .AddEntityFrameworkSqlServer()
+               .AddEntityFrameworkNpgsql()
                .AddDbContext<BlogContext>(options =>
-                   options.UseSqlServer(connection)
+                   options.UseNpgsql(connection)
                );
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

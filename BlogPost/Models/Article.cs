@@ -12,7 +12,6 @@ namespace BlogPost.Models
         public string Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        [NotMapped]
         public List<String> Tags { get; set; } = new List<String>();
         public long CreationTime { get; set; }
         public long LastEditTime { get; set; }
