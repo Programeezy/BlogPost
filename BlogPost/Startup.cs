@@ -19,6 +19,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using BlogPost.ViewModels;
 
 namespace BlogPost
 {
@@ -60,8 +62,12 @@ namespace BlogPost
                     };
                 });
 
-            services.AddScoped<UserRepository>();  //Interface?
+            var mappingConfig = new MapperConfiguration(mc => mc.AddProfile(new MappingProfile()));
+            services.AddSingleton(mappingConfig.CreateMapper());
 
+            services.AddScoped<UserRepository>();  //Interface?
+            services.AddScoped<ArticleRepository>();
+            services.AddScoped<LikeRepository>();
             services.AddSingleton<IAuthService>(
                 new AuthService(
                     Configuration.GetValue<string>("JWTSecretKey"),
@@ -113,7 +119,7 @@ namespace BlogPost
             );
 
             app.UseAuthentication();
-
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }

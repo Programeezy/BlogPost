@@ -1,0 +1,28 @@
+﻿@using BlogPost.ViewModels
+@model ArticlesViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+@foreach (var item in Model.Articles)
+{
+    <div class="story-item">
+        <a href="/PlainArticles/@item.Id">
+            <h3>@item.Title</h3>
+        </a>
+        <p>Author: @item.OwnerUsername</p>
+        <div>
+            <p>Tags:</p>
+            <ul>
+                @foreach (var tag in item.Tags)
+                {
+                    <li>
+                        @tag
+                    </li>
+                }
+            </ul>
+        </div>
+        <p>Publish time: @DateTimeOffset.FromUnixTimeSeconds(@item.PublishTime).Date.ToString("d")</p>
+    </div>
+}

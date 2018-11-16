@@ -1,0 +1,23 @@
+﻿@using BlogPost.ViewModels
+@model ArticleDetailViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<h1>@Model.Title</h1>
+<p>Author: @Model.OwnerUsername</p>
+<div>
+    <p>Tags:</p>
+    <ul>
+        @foreach (var tag in Model.Tags)
+        {
+            <li>
+                @tag
+            </li>
+        }
+    </ul>
+</div>
+<p>Publish time: @DateTimeOffset.FromUnixTimeSeconds(@Model.PublishTime).Date.ToString("d")</p>
+<p>Number of likes: @Model.LikesNumber</p>
+© 2018 GitHub, Inc.

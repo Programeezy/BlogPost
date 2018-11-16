@@ -23,6 +23,8 @@ namespace BlogPost.Data
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
             ConfigureModelBuilderForUser(modelBuilder);
+            ConfigureModelBuilderForArticle(modelBuilder);
+            ConfigureModelBuilderForLike(modelBuilder);
         }
 
         void ConfigureModelBuilderForUser(ModelBuilder modelBuilder)
@@ -54,6 +56,12 @@ namespace BlogPost.Data
                 .HasOne(s => s.Owner)
                 .WithMany(u => u.Articles)
                 .HasForeignKey(s => s.OwnerId);
+        }
+
+        void ConfigureModelBuilderForLike(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Like>().ToTable("Like");
+            modelBuilder.Entity<Like>().HasKey(l => new { l.ArticleId, l.UserId });
         }
     }
 }
